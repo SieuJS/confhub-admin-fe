@@ -27,7 +27,7 @@ export default function ConferencesProvider ({children} : Props) {
     </ConferencesContext>
   )
 }
-
+// eslint-disable-next-line react-refresh/only-export-components
 export const useConferences = () => {
   const conferencesContext = React.useContext(ConferencesContext)
 

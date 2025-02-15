@@ -1,4 +1,4 @@
-import {z} from 'zod'
+import { z } from 'zod'
 
 const conferenceStatusSchema = z.union([
   z.literal('active'),

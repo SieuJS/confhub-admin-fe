@@ -1,23 +1,25 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import useDialogState from '@/hooks/use-dialog-state'
 import { Conference } from '../data/schema'
 
 type ConferencesDialogType = 'add' | 'edit' | 'delete'
 
 interface ConferencesContextType {
-    open: ConferencesDialogType | null
-    setOpen: (str: ConferencesDialogType | null) => void
-    currentRow: Conference | null
-    setCurrentRow: React.Dispatch<React.SetStateAction<Conference | null>>
+  open: ConferencesDialogType | null
+  setOpen: (str: ConferencesDialogType | null) => void
+  currentRow: Conference | null
+  setCurrentRow: React.Dispatch<React.SetStateAction<Conference | null>>
 }
 
-const ConferencesContext = React.createContext<ConferencesContextType | null>(null)
+const ConferencesContext = React.createContext<ConferencesContextType | null>(
+  null
+)
 
 interface Props {
-    children: React.ReactNode
+  children: React.ReactNode
 }
 
-export default function ConferencesProvider ({children} : Props) {
+export default function ConferencesProvider({ children }: Props) {
   const [open, setOpen] = useDialogState<ConferencesDialogType>(null)
   const [currentRow, setCurrentRow] = useState<Conference | null>(null)
 

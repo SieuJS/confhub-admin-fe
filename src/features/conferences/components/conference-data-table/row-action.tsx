@@ -10,9 +10,8 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { Conference } from '../../data/schema'
 import { useConferences } from '../../contexts/conferences-context'
-
+import { Conference } from '../../data/schema'
 
 interface DataTableRowActionsProps {
   row: Row<Conference>

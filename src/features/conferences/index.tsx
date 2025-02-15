@@ -5,6 +5,7 @@ import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
 import ConferencesTable from './components/conference-data-table'
 import { columns } from './components/conference-data-table/conferences-columns'
+import TabsNavigation from './components/tabs-navigation'
 import ConferencesProvider from './contexts/conferences-context'
 import { conferences } from './data/conferences'
 import { conferenceListSchema } from './data/schema'
@@ -23,8 +24,10 @@ export default function Conferences() {
       <Main>
         <div className='mb-2 flex flex-wrap items-center justify-between gap-x-4 space-y-2'>
           <div>
-            <h2 className='text-2xl font-bold tracking-tight'>Conferences</h2>
-            <p className='text-muted-foreground'>List of conferences</p>
+            <h2 className='mb-2 text-2xl font-bold tracking-tight'>
+              Conferences
+            </h2>
+            <TabsNavigation />
           </div>
         </div>
         <div className='-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-x-12 lg:space-y-0'>

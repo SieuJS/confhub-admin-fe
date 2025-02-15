@@ -67,6 +67,9 @@ const AuthenticatedSettingsAppearanceLazyImport = createFileRoute(
 const AuthenticatedSettingsAccountLazyImport = createFileRoute(
   '/_authenticated/settings/account',
 )()
+const AuthenticatedConferencesCrawlInfoIndexLazyImport = createFileRoute(
+  '/_authenticated/conferences/crawl-info/',
+)()
 
 // Create/Update Routes
 
@@ -286,6 +289,17 @@ const AuthenticatedSettingsAccountLazyRoute =
     ),
   )
 
+const AuthenticatedConferencesCrawlInfoIndexLazyRoute =
+  AuthenticatedConferencesCrawlInfoIndexLazyImport.update({
+    id: '/conferences/crawl-info/',
+    path: '/conferences/crawl-info/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any).lazy(() =>
+    import('./routes/_authenticated/conferences/crawl-info/index.lazy').then(
+      (d) => d.Route,
+    ),
+  )
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -465,6 +479,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedUsersIndexLazyImport
       parentRoute: typeof AuthenticatedRouteImport
     }
+    '/_authenticated/conferences/crawl-info/': {
+      id: '/_authenticated/conferences/crawl-info/'
+      path: '/conferences/crawl-info'
+      fullPath: '/conferences/crawl-info'
+      preLoaderRoute: typeof AuthenticatedConferencesCrawlInfoIndexLazyImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
   }
 }
 
@@ -505,6 +526,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedHelpCenterIndexLazyRoute: typeof AuthenticatedHelpCenterIndexLazyRoute
   AuthenticatedTasksIndexLazyRoute: typeof AuthenticatedTasksIndexLazyRoute
   AuthenticatedUsersIndexLazyRoute: typeof AuthenticatedUsersIndexLazyRoute
+  AuthenticatedConferencesCrawlInfoIndexLazyRoute: typeof AuthenticatedConferencesCrawlInfoIndexLazyRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -518,6 +540,8 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedHelpCenterIndexLazyRoute: AuthenticatedHelpCenterIndexLazyRoute,
   AuthenticatedTasksIndexLazyRoute: AuthenticatedTasksIndexLazyRoute,
   AuthenticatedUsersIndexLazyRoute: AuthenticatedUsersIndexLazyRoute,
+  AuthenticatedConferencesCrawlInfoIndexLazyRoute:
+    AuthenticatedConferencesCrawlInfoIndexLazyRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
@@ -548,6 +572,7 @@ export interface FileRoutesByFullPath {
   '/settings/': typeof AuthenticatedSettingsIndexLazyRoute
   '/tasks': typeof AuthenticatedTasksIndexLazyRoute
   '/users': typeof AuthenticatedUsersIndexLazyRoute
+  '/conferences/crawl-info': typeof AuthenticatedConferencesCrawlInfoIndexLazyRoute
 }
 
 export interface FileRoutesByTo {
@@ -573,6 +598,7 @@ export interface FileRoutesByTo {
   '/settings': typeof AuthenticatedSettingsIndexLazyRoute
   '/tasks': typeof AuthenticatedTasksIndexLazyRoute
   '/users': typeof AuthenticatedUsersIndexLazyRoute
+  '/conferences/crawl-info': typeof AuthenticatedConferencesCrawlInfoIndexLazyRoute
 }
 
 export interface FileRoutesById {
@@ -602,6 +628,7 @@ export interface FileRoutesById {
   '/_authenticated/settings/': typeof AuthenticatedSettingsIndexLazyRoute
   '/_authenticated/tasks/': typeof AuthenticatedTasksIndexLazyRoute
   '/_authenticated/users/': typeof AuthenticatedUsersIndexLazyRoute
+  '/_authenticated/conferences/crawl-info/': typeof AuthenticatedConferencesCrawlInfoIndexLazyRoute
 }
 
 export interface FileRouteTypes {
@@ -631,6 +658,7 @@ export interface FileRouteTypes {
     | '/settings/'
     | '/tasks'
     | '/users'
+    | '/conferences/crawl-info'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/500'
@@ -655,6 +683,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/tasks'
     | '/users'
+    | '/conferences/crawl-info'
   id:
     | '__root__'
     | '/_authenticated'
@@ -682,6 +711,7 @@ export interface FileRouteTypes {
     | '/_authenticated/settings/'
     | '/_authenticated/tasks/'
     | '/_authenticated/users/'
+    | '/_authenticated/conferences/crawl-info/'
   fileRoutesById: FileRoutesById
 }
 
@@ -749,7 +779,8 @@ export const routeTree = rootRoute
         "/_authenticated/conferences/",
         "/_authenticated/help-center/",
         "/_authenticated/tasks/",
-        "/_authenticated/users/"
+        "/_authenticated/users/",
+        "/_authenticated/conferences/crawl-info/"
       ]
     },
     "/(auth)/500": {
@@ -842,6 +873,10 @@ export const routeTree = rootRoute
     },
     "/_authenticated/users/": {
       "filePath": "_authenticated/users/index.lazy.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/conferences/crawl-info/": {
+      "filePath": "_authenticated/conferences/crawl-info/index.lazy.tsx",
       "parent": "/_authenticated"
     }
   }

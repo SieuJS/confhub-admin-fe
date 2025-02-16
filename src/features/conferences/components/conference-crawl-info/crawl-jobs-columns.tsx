@@ -6,6 +6,7 @@ import LongText from "@/components/long-text";
 import { cn } from "@/lib/utils";
 import { callTypes } from "../../data/crawl-info/data";
 import { Badge } from "@/components/ui/badge";
+import { DataTableRowActions } from "./row-action";
 
 export const crawlJobColumns : ColumnDef<CrawlJob>[] = [
     {
@@ -92,5 +93,39 @@ export const crawlJobColumns : ColumnDef<CrawlJob>[] = [
         enableHiding : false,
         enableSorting : false,
     },
+    {
+        accessorKey : 'createdAt',
+        header : ({column}) => (
+            <DataTableColumnHeader column={column} title='Created At' />
+        ),
+        cell : ({row}) => {
+            const {createdAt} = row.original;
+
+            return <><LongText className='max-w-36'>{createdAt.toLocaleTimeString()}</LongText>
+            <LongText className='max-w-36'>{createdAt.toLocaleDateString()}</LongText></>
+        },
+        meta : {
+            className : cn('bg-background transition-colors duration-200 group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted sticky left-6 md:table-cell')
+        },
+    },
+    {
+        accessorKey : 'updatedAt',
+        header : ({column}) => (
+            <DataTableColumnHeader column={column} title='Updated At' />
+        ),
+        cell : ({row}) => {
+            const {updatedAt} = row.original;
+
+            return <><LongText className='max-w-36'>{updatedAt.toLocaleTimeString()}</LongText>
+            <LongText className='max-w-36'>{updatedAt.toLocaleDateString()}</LongText></>
+        },
+        meta : {
+            className : cn('bg-background transition-colors duration-200 group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted sticky left-6 md:table-cell')
+        },
+    }, 
+    {
+        id : 'actions',
+        cell : DataTableRowActions,
+    }
     
 ]

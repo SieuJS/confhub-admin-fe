@@ -67,6 +67,9 @@ const AuthenticatedSettingsAppearanceLazyImport = createFileRoute(
 const AuthenticatedSettingsAccountLazyImport = createFileRoute(
   '/_authenticated/settings/account',
 )()
+const AuthenticatedConferencesManageCrawlIndexLazyImport = createFileRoute(
+  '/_authenticated/conferences/manage-crawl/',
+)()
 const AuthenticatedConferencesCrawlInfoIndexLazyImport = createFileRoute(
   '/_authenticated/conferences/crawl-info/',
 )()
@@ -289,6 +292,17 @@ const AuthenticatedSettingsAccountLazyRoute =
     ),
   )
 
+const AuthenticatedConferencesManageCrawlIndexLazyRoute =
+  AuthenticatedConferencesManageCrawlIndexLazyImport.update({
+    id: '/conferences/manage-crawl/',
+    path: '/conferences/manage-crawl/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any).lazy(() =>
+    import('./routes/_authenticated/conferences/manage-crawl/index.lazy').then(
+      (d) => d.Route,
+    ),
+  )
+
 const AuthenticatedConferencesCrawlInfoIndexLazyRoute =
   AuthenticatedConferencesCrawlInfoIndexLazyImport.update({
     id: '/conferences/crawl-info/',
@@ -486,6 +500,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedConferencesCrawlInfoIndexLazyImport
       parentRoute: typeof AuthenticatedRouteImport
     }
+    '/_authenticated/conferences/manage-crawl/': {
+      id: '/_authenticated/conferences/manage-crawl/'
+      path: '/conferences/manage-crawl'
+      fullPath: '/conferences/manage-crawl'
+      preLoaderRoute: typeof AuthenticatedConferencesManageCrawlIndexLazyImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
   }
 }
 
@@ -527,6 +548,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedTasksIndexLazyRoute: typeof AuthenticatedTasksIndexLazyRoute
   AuthenticatedUsersIndexLazyRoute: typeof AuthenticatedUsersIndexLazyRoute
   AuthenticatedConferencesCrawlInfoIndexLazyRoute: typeof AuthenticatedConferencesCrawlInfoIndexLazyRoute
+  AuthenticatedConferencesManageCrawlIndexLazyRoute: typeof AuthenticatedConferencesManageCrawlIndexLazyRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -542,6 +564,8 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedUsersIndexLazyRoute: AuthenticatedUsersIndexLazyRoute,
   AuthenticatedConferencesCrawlInfoIndexLazyRoute:
     AuthenticatedConferencesCrawlInfoIndexLazyRoute,
+  AuthenticatedConferencesManageCrawlIndexLazyRoute:
+    AuthenticatedConferencesManageCrawlIndexLazyRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
@@ -573,6 +597,7 @@ export interface FileRoutesByFullPath {
   '/tasks': typeof AuthenticatedTasksIndexLazyRoute
   '/users': typeof AuthenticatedUsersIndexLazyRoute
   '/conferences/crawl-info': typeof AuthenticatedConferencesCrawlInfoIndexLazyRoute
+  '/conferences/manage-crawl': typeof AuthenticatedConferencesManageCrawlIndexLazyRoute
 }
 
 export interface FileRoutesByTo {
@@ -599,6 +624,7 @@ export interface FileRoutesByTo {
   '/tasks': typeof AuthenticatedTasksIndexLazyRoute
   '/users': typeof AuthenticatedUsersIndexLazyRoute
   '/conferences/crawl-info': typeof AuthenticatedConferencesCrawlInfoIndexLazyRoute
+  '/conferences/manage-crawl': typeof AuthenticatedConferencesManageCrawlIndexLazyRoute
 }
 
 export interface FileRoutesById {
@@ -629,6 +655,7 @@ export interface FileRoutesById {
   '/_authenticated/tasks/': typeof AuthenticatedTasksIndexLazyRoute
   '/_authenticated/users/': typeof AuthenticatedUsersIndexLazyRoute
   '/_authenticated/conferences/crawl-info/': typeof AuthenticatedConferencesCrawlInfoIndexLazyRoute
+  '/_authenticated/conferences/manage-crawl/': typeof AuthenticatedConferencesManageCrawlIndexLazyRoute
 }
 
 export interface FileRouteTypes {
@@ -659,6 +686,7 @@ export interface FileRouteTypes {
     | '/tasks'
     | '/users'
     | '/conferences/crawl-info'
+    | '/conferences/manage-crawl'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/500'
@@ -684,6 +712,7 @@ export interface FileRouteTypes {
     | '/tasks'
     | '/users'
     | '/conferences/crawl-info'
+    | '/conferences/manage-crawl'
   id:
     | '__root__'
     | '/_authenticated'
@@ -712,6 +741,7 @@ export interface FileRouteTypes {
     | '/_authenticated/tasks/'
     | '/_authenticated/users/'
     | '/_authenticated/conferences/crawl-info/'
+    | '/_authenticated/conferences/manage-crawl/'
   fileRoutesById: FileRoutesById
 }
 
@@ -780,7 +810,8 @@ export const routeTree = rootRoute
         "/_authenticated/help-center/",
         "/_authenticated/tasks/",
         "/_authenticated/users/",
-        "/_authenticated/conferences/crawl-info/"
+        "/_authenticated/conferences/crawl-info/",
+        "/_authenticated/conferences/manage-crawl/"
       ]
     },
     "/(auth)/500": {
@@ -877,6 +908,10 @@ export const routeTree = rootRoute
     },
     "/_authenticated/conferences/crawl-info/": {
       "filePath": "_authenticated/conferences/crawl-info/index.lazy.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/conferences/manage-crawl/": {
+      "filePath": "_authenticated/conferences/manage-crawl/index.lazy.tsx",
       "parent": "/_authenticated"
     }
   }

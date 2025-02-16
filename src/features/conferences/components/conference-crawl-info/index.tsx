@@ -22,9 +22,10 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { Conference } from '../../data/overview/schema'
+
 import { DataTablePagination } from '../shared/pagination'
-import { DataTableToolbar } from './tool-bars'
+import { CrawlJobDataTableToolbar } from './tool-bars'
+import { CrawlJob } from '../../data/crawl-info/schema'
 
 declare module '@tanstack/react-table' {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -34,18 +35,18 @@ declare module '@tanstack/react-table' {
 }
 
 interface DataTableProps {
-  columns: ColumnDef<Conference>[]
-  data: Conference[]
+  columns: ColumnDef<CrawlJob>[]
+  data: CrawlJob[]
 }
 
-export default function ConferencesTable({ columns, data }: DataTableProps) {
+export default function CrawlJobDataTable({ columns, data }: DataTableProps) {
   const [rowSelection, setRowSelection] = useState({})
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [sorting, setSorting] = useState<SortingState>([])
 
-  const table = useReactTable({
-    data,
+  const table = useReactTable<CrawlJob>({
+    data: data,
     columns,
     state: {
       sorting,
@@ -68,7 +69,7 @@ export default function ConferencesTable({ columns, data }: DataTableProps) {
 
   return (
     <div className='space-y-4'>
-      <DataTableToolbar table={table} />
+      <CrawlJobDataTableToolbar table={table} />
       <div className='rounded-md border'>
         <Table>
           <TableHeader>

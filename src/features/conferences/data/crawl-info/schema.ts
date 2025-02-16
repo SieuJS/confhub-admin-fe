@@ -15,7 +15,7 @@ const crawlJobSchema = z.object({
     id: z.string(),
     conferenceId: z.string(),
     conferenceAcronym: z.string(),
-    progress : z.number().gt(0).lt(100),    
+    progress : z.number(), 
     status: crawlJobStatusSchema,
     createdAt: z.coerce.date(),
     updatedAt: z.coerce.date(),

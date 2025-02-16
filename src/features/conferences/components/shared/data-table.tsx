@@ -22,9 +22,9 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { Conference } from '../../data/overview/schema'
+
 import { DataTablePagination } from '../shared/pagination'
-import { DataTableToolbar } from './tool-bars'
+import { DataTableToolbar } from '../conference-data-table/tool-bars'
 
 declare module '@tanstack/react-table' {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -33,19 +33,19 @@ declare module '@tanstack/react-table' {
   }
 }
 
-interface DataTableProps {
-  columns: ColumnDef<Conference>[]
-  data: Conference[]
+interface DataTableProps<TData> {
+  columns: ColumnDef<TData>[]
+  data: TData[]
 }
 
-export default function ConferencesTable({ columns, data }: DataTableProps) {
+export default function DataTable<TData>({ columns, data }: DataTableProps<TData>) {
   const [rowSelection, setRowSelection] = useState({})
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [sorting, setSorting] = useState<SortingState>([])
 
-  const table = useReactTable({
-    data,
+  const table = useReactTable<TData>({
+    data: data as TData[],
     columns,
     state: {
       sorting,

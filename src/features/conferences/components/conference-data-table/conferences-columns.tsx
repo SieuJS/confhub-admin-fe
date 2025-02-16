@@ -5,8 +5,8 @@ import { Checkbox } from '@/components/ui/checkbox'
 import LongText from '@/components/long-text'
 import { callTypes } from '../../data/overview/data'
 import { Conference } from '../../data/overview/schema'
-import { DataTableColumnHeader } from './column-header'
-import { DataTableRowActions } from './row-action'
+import { DataTableColumnHeader } from '../shared/column-header'
+import { DataTableRowActions } from '../shared/row-action'
 
 export const columns: ColumnDef<Conference>[] = [
   {

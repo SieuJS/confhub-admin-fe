@@ -39,8 +39,7 @@ export default function Users() {
           <UsersTable data={userList} columns={columns} />
         </div>
       </Main>
-
-      <UsersDialogs />
+      <UsersDialogs/>
     </UsersProvider>
   )
 }

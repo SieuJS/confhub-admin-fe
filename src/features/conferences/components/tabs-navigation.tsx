@@ -1,8 +1,11 @@
-import { useEffect, useState } from 'react'
-import { useLocation } from '@tanstack/react-router'
+import { HTMLAttributes, useEffect, useState } from 'react'
+import { Link, useLocation} from '@tanstack/react-router'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { cn } from '@/lib/utils'
 
-export default function TabsNavigation() {
+
+
+export default function TabsNavigation({ className }: HTMLAttributes<HTMLElement>) {
   const { pathname } = useLocation()
   const [currentTabValue, setCurrentTabValue] = useState<
     'overview' | 'crawl-info' | 'reports' | 'notifications'
@@ -20,16 +23,16 @@ export default function TabsNavigation() {
     }
   }, [pathname])
   return (
-    <Tabs
-      orientation='vertical'
-      defaultValue='overview'
-      className='space-y-4'
-      value={currentTabValue}
-    >
-      <div className='w-full overflow-x-auto pb-2'>
-        <TabsList>
-          <TabsTrigger value='overview'>Overview</TabsTrigger>
-          <TabsTrigger value='crawl-info'>Crawler Infor</TabsTrigger>
+    <div className={cn('relative h-8 w-full flex-1 justify-start rounded-md bg-muted/25 text-sm font-normal text-muted-foreground shadow-none hover:bg-muted/50', className)}>
+      <Tabs
+        orientation='vertical'
+        defaultValue='overview'
+        className='space-y-4'
+        value={currentTabValue}
+      >
+        <TabsList >
+          <TabsTrigger value='overview'><Link to = "/conferences">Overview</Link></TabsTrigger>
+          <TabsTrigger value='crawl-info'><Link to='/conferences/crawl-info'>Crawl Infor</Link></TabsTrigger>
           <TabsTrigger value='reports' disabled>
             Reports
           </TabsTrigger>
@@ -37,7 +40,8 @@ export default function TabsNavigation() {
             Notifications
           </TabsTrigger>
         </TabsList>
-      </div>
-    </Tabs>
+      </Tabs>
+    </div>
+
   )
 }

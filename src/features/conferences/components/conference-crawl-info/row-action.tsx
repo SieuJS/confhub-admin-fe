@@ -10,8 +10,8 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { CrawlJob } from '../../data/crawl-info/schema'
 import { useCrawlJob } from '../../contexts/crawl-job-context'
+import { CrawlJob } from '../../data/crawl-info/schema'
 
 interface DataTableRowActionsProps {
   row: Row<CrawlJob>

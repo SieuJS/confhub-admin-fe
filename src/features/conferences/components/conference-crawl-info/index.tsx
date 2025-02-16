@@ -22,10 +22,9 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-
+import { CrawlJob } from '../../data/crawl-info/schema'
 import { DataTablePagination } from '../shared/pagination'
 import { CrawlJobDataTableToolbar } from './tool-bars'
-import { CrawlJob } from '../../data/crawl-info/schema'
 
 declare module '@tanstack/react-table' {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

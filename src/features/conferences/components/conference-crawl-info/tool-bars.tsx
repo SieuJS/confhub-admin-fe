@@ -2,9 +2,9 @@ import { Cross2Icon } from '@radix-ui/react-icons'
 import { Table } from '@tanstack/react-table'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import { DataTableFacetedFilter } from '../shared/faceted-filter'
 import { DataTableViewOptions } from '../shared/view-options'
-import { Label } from '@/components/ui/label'
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>
@@ -17,16 +17,22 @@ export function CrawlJobDataTableToolbar<TData>({
 
   return (
     <div className='flex items-center justify-between'>
-      <div className='flex flex-1 flex-col-reverse items-start gap-y-2 gap-3 sm:flex-row sm:items-center sm:space-x-2'>
-          <Input
-            placeholder='Filter aronym, id...'
-            value={(table.getColumn('conferenceAcronym')?.getFilterValue() as string) ?? ''}
-            onChange={(event) =>
-              table.getColumn('conferenceAcronym')?.setFilterValue(event.target.value)
-            }
-            className='h-8 w-[150px] lg:w-[250px]'
-          />
-          <div className='flex items-center justify-between gap-2'>
+      <div className='flex flex-1 flex-col-reverse items-start gap-3 gap-y-2 sm:flex-row sm:items-center sm:space-x-2'>
+        <Input
+          placeholder='Filter aronym, id...'
+          value={
+            (table
+              .getColumn('conferenceAcronym')
+              ?.getFilterValue() as string) ?? ''
+          }
+          onChange={(event) =>
+            table
+              .getColumn('conferenceAcronym')
+              ?.setFilterValue(event.target.value)
+          }
+          className='h-8 w-[150px] lg:w-[250px]'
+        />
+        <div className='flex items-center justify-between gap-2'>
           <Label htmlFor='from-date'>From</Label>
           <Input
             id='from-date'
@@ -36,8 +42,8 @@ export function CrawlJobDataTableToolbar<TData>({
             }
             className='h-8 w-[50px] lg:w-[150px]'
           />
-          </div>
-          <div className='flex items-center justify-between gap-2'>
+        </div>
+        <div className='flex items-center justify-between gap-2'>
           <Label htmlFor='to-date'>To</Label>
           <Input
             id='to-date'
@@ -47,7 +53,7 @@ export function CrawlJobDataTableToolbar<TData>({
             }
             className='h-8 w-[50px] lg:w-[150px]'
           />
-          </div>
+        </div>
         <div className='flex gap-x-2'>
           {table.getColumn('status') && (
             <DataTableFacetedFilter

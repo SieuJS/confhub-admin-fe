@@ -1,11 +1,10 @@
 import { Main } from '@/components/layout/main'
-import { CrawlJobListSchema } from './data/crawl-info/schema'
-import { crawlJob } from './data/crawl-info/crawl-job'
-import { crawlJobColumns } from './components/conference-crawl-info/crawl-jobs-columns'
-
-import CrawlJobProvider from './contexts/crawl-job-context'
 import CrawlJobDataTable from './components/conference-crawl-info'
+import { crawlJobColumns } from './components/conference-crawl-info/crawl-jobs-columns'
 import ConferenceHeader from './components/conference-header'
+import CrawlJobProvider from './contexts/crawl-job-context'
+import { crawlJob } from './data/crawl-info/crawl-job'
+import { CrawlJobListSchema } from './data/crawl-info/schema'
 
 export default function ConferenceCrawlInfo() {
   const crawlJobList = CrawlJobListSchema.parse(crawlJob)
@@ -15,7 +14,7 @@ export default function ConferenceCrawlInfo() {
       <Main>
         <div className='mb-2 flex flex-wrap items-center justify-between gap-x-4 space-y-2'>
           <div className='grid grid-cols-2'>
-            <h2 className='text-2xl font-bold tracking-tight '>
+            <h2 className='text-2xl font-bold tracking-tight'>
               Conference Crawl Information
             </h2>
           </div>

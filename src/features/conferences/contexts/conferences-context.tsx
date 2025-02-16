@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import useDialogState from '@/hooks/use-dialog-state'
-import { Conference } from '../data/schema'
+import { Conference } from '../data/overview/schema'
 
 type ConferencesDialogType = 'add' | 'edit' | 'delete'
 

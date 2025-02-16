@@ -7,8 +7,8 @@ import ConferencesTable from './components/conference-data-table'
 import { columns } from './components/conference-data-table/conferences-columns'
 import TabsNavigation from './components/tabs-navigation'
 import ConferencesProvider from './contexts/conferences-context'
-import { conferences } from './data/conferences'
-import { conferenceListSchema } from './data/schema'
+import { conferences } from './data/overview/conferences'
+import { conferenceListSchema } from './data/overview/schema'
 
 export default function Conferences() {
   const conferenceList = conferenceListSchema.parse(conferences)

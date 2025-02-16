@@ -22,7 +22,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { Conference } from '../../data/schema'
+import { Conference } from '../../data/overview/schema'
 import { DataTablePagination } from './pagination'
 import { DataTableToolbar } from './tool-bars'
 

@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { useConferences } from '../../contexts/conferences-context'
-import { Conference } from '../../data/schema'
+import { Conference } from '../../data/overview/schema'
 
 interface DataTableRowActionsProps {
   row: Row<Conference>

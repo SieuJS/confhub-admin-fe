@@ -24,3 +24,4 @@ const conferenceSchema = z.object({
 export type Conference = z.infer<typeof conferenceSchema>
 
 export const conferenceListSchema = z.array(conferenceSchema)
+

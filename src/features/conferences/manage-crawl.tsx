@@ -1,9 +1,12 @@
 import { Main } from '@/components/layout/main'
 import ConferenceHeader from './components/conference-header'
+import ManageCrawlJobProvider from './contexts/manage-crawl-job-context'
+import ManageCrawlPrimaryButton from './components/manage-crawl/manage-crawl-primary-button'
+import { ManageCrawlDialogs } from './components/manage-crawl/manage-crawl-dialogs'
 
 export default function ManageCrawl() {
   return (
-    <div>
+    <ManageCrawlJobProvider>
       <ConferenceHeader />
       <Main>
         <div className='mb-2 flex flex-wrap items-center justify-between gap-x-4 space-y-2'>
@@ -12,8 +15,10 @@ export default function ManageCrawl() {
               Manage Crawl
             </h2>
           </div>
+          <ManageCrawlPrimaryButton />
         </div>
       </Main>
-    </div>
+      <ManageCrawlDialogs/>
+    </ManageCrawlJobProvider>
   )
 }

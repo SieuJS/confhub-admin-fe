@@ -1,11 +1,19 @@
+import { Button } from "@/components/ui/button"
+import { useManageCrawlJob } from "../../contexts/manage-crawl-job-context"
+import { IconDownload } from "@tabler/icons-react"
+
 export default function ManageCrawlPrimaryButton() {
+  const { setOpen } = useManageCrawlJob() 
+
   return (
-    <div className='flex items-center justify-between gap-x-4 space-y-2'>
-      <div className='grid grid-cols-2'>
-        <h2 className='mb-4 text-2xl font-bold tracking-tight'>
-          Manage Crawl
-        </h2>
-      </div>
+    <div className="flex gap-2 items-center">
+        <Button
+            variant="outline"
+            className="space-x-1"
+            onClick={() => setOpen('import')}
+        >
+            <span>Import from file</span> <IconDownload size={18} />
+        </Button>
     </div>
   )
 }

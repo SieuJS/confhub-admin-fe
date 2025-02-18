@@ -9,6 +9,8 @@ interface ManageCrawlJobContextType {
   setOpen: (str: ManageCrawlJobDialogType | null) => void
   currentRow: CrawlJob | null
   setCurrentRow: React.Dispatch<React.SetStateAction<CrawlJob | null>>
+  importFile: File | null
+  setImportFile: React.Dispatch<React.SetStateAction<File | null>>
 }
 
 const ManageCrawlJobContext = createContext<ManageCrawlJobContextType | null>(null)
@@ -21,8 +23,9 @@ export default function ManageCrawlJobProvider({ children }: Props) {
   const [open, setOpen] = useDialogState<ManageCrawlJobDialogType>(null)
   const [currentRow, setCurrentRow] = useState<CrawlJob | null>(null)
 
+  const [importFile , setImportFile] = useState<File | null>(null)
   return (
-    <ManageCrawlJobContext value={{ open, setOpen, currentRow, setCurrentRow }}>
+    <ManageCrawlJobContext value={{ open, setOpen, currentRow, setCurrentRow , importFile , setImportFile }}>
       {children}
     </ManageCrawlJobContext>
   )

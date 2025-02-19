@@ -1,7 +1,8 @@
 import { createContext, useContext, useState } from 'react'
+import PapaParse from 'papaparse'
 import useDialogState from '@/hooks/use-dialog-state'
 import { CrawlJob } from '../data/crawl-info/schema'
-import PapaParse from 'papaparse'
+
 type ManageCrawlJobDialogType = 'import' | 'edit' | 'delete'
 
 interface ManageCrawlJobContextType {
@@ -27,11 +28,12 @@ export default function ManageCrawlJobProvider({ children }: Props) {
 
   const [importFile, setImportFile] = useState<File | null>(null)
 
-  importFile && PapaParse.parse(importFile, {
-    complete: (result) => {
-      console.log('Parsed CSV:', result.data)
-    }
-  })
+  importFile &&
+    PapaParse.parse(importFile, {
+      complete: (result) => {
+        console.log('Parsed CSV:', result.data)
+      },
+    })
 
   return (
     <ManageCrawlJobContext

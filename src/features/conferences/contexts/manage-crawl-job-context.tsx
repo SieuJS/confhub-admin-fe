@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from 'react'
-import PapaParse from 'papaparse'
 import useDialogState from '@/hooks/use-dialog-state'
 import { CrawlJob } from '../data/crawl-info/schema'
+import { ImportedConference } from '../data/imported-conference/schema'
 
 type ManageCrawlJobDialogType = 'import' | 'edit' | 'delete'
 
@@ -10,8 +10,8 @@ interface ManageCrawlJobContextType {
   setOpen: (str: ManageCrawlJobDialogType | null) => void
   currentRow: CrawlJob | null
   setCurrentRow: React.Dispatch<React.SetStateAction<CrawlJob | null>>
-  importFile: File | null
-  setImportFile: React.Dispatch<React.SetStateAction<File | null>>
+  parsedData: Array<ImportedConference> | null
+  setParsedData: React.Dispatch<React.SetStateAction<Array<ImportedConference> | null>>
 }
 
 const ManageCrawlJobContext = createContext<ManageCrawlJobContextType | null>(
@@ -26,14 +26,7 @@ export default function ManageCrawlJobProvider({ children }: Props) {
   const [open, setOpen] = useDialogState<ManageCrawlJobDialogType>(null)
   const [currentRow, setCurrentRow] = useState<CrawlJob | null>(null)
 
-  const [importFile, setImportFile] = useState<File | null>(null)
-
-  importFile &&
-    PapaParse.parse(importFile, {
-      complete: (result) => {
-        console.log('Parsed CSV:', result.data)
-      },
-    })
+  const [parsedData, setParsedData ] = useState< Array<ImportedConference> | null>(null)
 
   return (
     <ManageCrawlJobContext
@@ -42,8 +35,8 @@ export default function ManageCrawlJobProvider({ children }: Props) {
         setOpen,
         currentRow,
         setCurrentRow,
-        importFile,
-        setImportFile,
+        parsedData, 
+        setParsedData
       }}
     >
       {children}
@@ -60,6 +53,5 @@ export const useManageCrawlJob = () => {
       'useManageCrawlJob has to be used within <ManageCrawlJobContext>'
     )
   }
-
   return manageCrawlJobContext
 }

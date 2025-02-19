@@ -3,8 +3,11 @@ import ConferenceHeader from './components/conference-header'
 import { ManageCrawlDialogs } from './components/manage-crawl/manage-crawl-dialogs'
 import ManageCrawlPrimaryButton from './components/manage-crawl/manage-crawl-primary-button'
 import ManageCrawlJobProvider from './contexts/manage-crawl-job-context'
+import ImportConferencesTable from './components/import-conference/data-table-import-conference'
+
 
 export default function ManageCrawl() {
+
   return (
     <ManageCrawlJobProvider>
       <ConferenceHeader />
@@ -16,6 +19,9 @@ export default function ManageCrawl() {
             </h2>
           </div>
           <ManageCrawlPrimaryButton />
+                  <div className='-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-x-12 lg:space-y-0'>
+                    <ImportConferencesTable/>
+          </div>
         </div>
       </Main>
       <ManageCrawlDialogs />

@@ -22,6 +22,8 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { useManageCrawlJob } from '../../contexts/manage-crawl-job-context'
+import PapaParse from 'papaparse'
+import { ImportedConference } from '../../data/imported-conference/schema'
 
 const formSchema = z.object({
   file: z
@@ -45,9 +47,8 @@ export function ConferenceImportDialog({ open, onOpenChange }: Props) {
     resolver: zodResolver(formSchema),
     defaultValues: { file: undefined },
   })
-  const { setImportFile } = useManageCrawlJob()
   const fileRef = form.register('file')
-
+  const manageCrawl = useManageCrawlJob();
   const onSubmit = () => {
     const file = form.getValues('file')
 
@@ -57,7 +58,23 @@ export function ConferenceImportDialog({ open, onOpenChange }: Props) {
         size: file[0].size,
         type: file[0].type,
       }
-      setImportFile(file[0])
+
+    PapaParse.parse(file[0] , {
+      complete: (result) => {
+        const data = result.data as Array<string[]>
+        const importedConferenceList : Array<ImportedConference | null>  = data.map((row) => {
+          if(!row[1] || !row[2] || !row[3] || !row[4] || !row[6]) return null
+          return {
+            title: row[1] ,
+            acronym: row[2],
+            source: row[3],
+            rank: row[4],
+            topics: row.slice(6),
+          }
+        })
+        manageCrawl.setParsedData(importedConferenceList as Array<ImportedConference>)
+      }
+    })
 
       toast({
         title: 'You have imported the following file:',

@@ -23,4 +23,4 @@ const crawlJobSchema = z.object({
 
 export type CrawlJob = z.infer<typeof crawlJobSchema>
 
-export const CrawlJobListSchema = z.array(crawlJobSchema)
+export const crawlJobListSchema = z.array(crawlJobSchema)

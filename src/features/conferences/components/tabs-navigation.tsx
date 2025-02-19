@@ -15,7 +15,7 @@ export default function ConferenceTopNav({
         isActive:
           pathname.endsWith('conferences') || pathname === '/conferences',
       },
-      { 
+      {
         title: 'Crawl Info',
         href: '/conferences/crawl-info',
         isActive: pathname.includes('crawl-info'),

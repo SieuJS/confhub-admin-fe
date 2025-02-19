@@ -45,7 +45,7 @@ export function ConferenceImportDialog({ open, onOpenChange }: Props) {
     resolver: zodResolver(formSchema),
     defaultValues: { file: undefined },
   })
-  const {setImportFile} = useManageCrawlJob()
+  const { setImportFile } = useManageCrawlJob()
   const fileRef = form.register('file')
 
   const onSubmit = () => {

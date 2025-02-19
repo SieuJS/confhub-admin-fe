@@ -1,19 +1,19 @@
-import { toast } from "@/hooks/use-toast";
-import { useManageCrawlJob } from "../../contexts/manage-crawl-job-context";
-import { ConferenceImportDialog } from "./conference-import-dialog";
-import { ConfirmDialog } from "@/components/confirm-dialog";
+import { toast } from '@/hooks/use-toast'
+import { ConfirmDialog } from '@/components/confirm-dialog'
+import { useManageCrawlJob } from '../../contexts/manage-crawl-job-context'
+import { ConferenceImportDialog } from './conference-import-dialog'
 
 export function ManageCrawlDialogs() {
-    const {open , setOpen , currentRow , setCurrentRow} = useManageCrawlJob()
+  const { open, setOpen, currentRow, setCurrentRow } = useManageCrawlJob()
 
-    return (
-        <>
-            <ConferenceImportDialog 
-                key = 'conference-import' 
-                open = {open === 'import'}
-                onOpenChange = {() => setOpen('import')}
-            />
-            {currentRow && (
+  return (
+    <>
+      <ConferenceImportDialog
+        key='conference-import'
+        open={open === 'import'}
+        onOpenChange={() => setOpen('import')}
+      />
+      {currentRow && (
         <>
           <ConfirmDialog
             key='task-delete'
@@ -54,6 +54,6 @@ export function ManageCrawlDialogs() {
           />
         </>
       )}
-        </>
-    )
+    </>
+  )
 }

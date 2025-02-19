@@ -1,6 +1,6 @@
-import { createContext, useContext, useState } from "react"
-import { CrawlJob } from "../data/crawl-info/schema"
-import useDialogState from "@/hooks/use-dialog-state"
+import { createContext, useContext, useState } from 'react'
+import useDialogState from '@/hooks/use-dialog-state'
+import { CrawlJob } from '../data/crawl-info/schema'
 
 type ManageCrawlJobDialogType = 'import' | 'edit' | 'delete'
 
@@ -13,7 +13,9 @@ interface ManageCrawlJobContextType {
   setImportFile: React.Dispatch<React.SetStateAction<File | null>>
 }
 
-const ManageCrawlJobContext = createContext<ManageCrawlJobContextType | null>(null)
+const ManageCrawlJobContext = createContext<ManageCrawlJobContextType | null>(
+  null
+)
 
 interface Props {
   children: React.ReactNode
@@ -23,9 +25,18 @@ export default function ManageCrawlJobProvider({ children }: Props) {
   const [open, setOpen] = useDialogState<ManageCrawlJobDialogType>(null)
   const [currentRow, setCurrentRow] = useState<CrawlJob | null>(null)
 
-  const [importFile , setImportFile] = useState<File | null>(null)
+  const [importFile, setImportFile] = useState<File | null>(null)
   return (
-    <ManageCrawlJobContext value={{ open, setOpen, currentRow, setCurrentRow , importFile , setImportFile }}>
+    <ManageCrawlJobContext
+      value={{
+        open,
+        setOpen,
+        currentRow,
+        setCurrentRow,
+        importFile,
+        setImportFile,
+      }}
+    >
       {children}
     </ManageCrawlJobContext>
   )
@@ -33,11 +44,13 @@ export default function ManageCrawlJobProvider({ children }: Props) {
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const useManageCrawlJob = () => {
-    const manageCrawlJobContext = useContext(ManageCrawlJobContext)
-    
-    if (!manageCrawlJobContext) {
-        throw new Error('useManageCrawlJob has to be used within <ManageCrawlJobContext>')
-    }
-    
-    return manageCrawlJobContext
+  const manageCrawlJobContext = useContext(ManageCrawlJobContext)
+
+  if (!manageCrawlJobContext) {
+    throw new Error(
+      'useManageCrawlJob has to be used within <ManageCrawlJobContext>'
+    )
+  }
+
+  return manageCrawlJobContext
 }

@@ -2,7 +2,7 @@ import { ColumnDef } from '@tanstack/react-table'
 import { Checkbox } from '@/components/ui/checkbox'
 import { ImportedConference } from '../../data/imported-conference/schema'
 
-const conferenceImportalColumns: ColumnDef<ImportedConference>[] = [
+export const conferenceImportalColumns: ColumnDef<ImportedConference>[] = [
   {
     id: 'select',
     header: ({ table }) => (

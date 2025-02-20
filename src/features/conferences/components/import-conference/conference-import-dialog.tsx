@@ -62,19 +62,19 @@ export function ConferenceImportDialog({ open, onOpenChange }: Props) {
     PapaParse.parse(file[0] , {
       complete: (result) => {
         const data = result.data as Array<string[]>
-        const importedConferenceList : Array<ImportedConference | null>  = data.map((row) => {
-          if(!row[1] || !row[2] || !row[3] || !row[4] || !row[6]) return null
-          return {
-            title: row[1] ,
-            acronym: row[2],
-            source: row[3],
-            rank: row[4],
-            topics: row.slice(6),
+        const parsed = data.reduce((acc, row) => {
+          const [title, acronym, source, rank, topicCodes] = row
+          const conference: ImportedConference = {
+            title,
+            acronym,
+            source,
+            rank,
+            topicCodes: topicCodes.split(','),
           }
-        })
-        manageCrawl.setParsedData(importedConferenceList as Array<ImportedConference>)
-      }
-    })
+          return [...acc, conference]
+        }, [] as ImportedConference[])
+        
+    }})
 
       toast({
         title: 'You have imported the following file:',

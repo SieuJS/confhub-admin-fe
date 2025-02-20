@@ -5,7 +5,7 @@ const importedConferenceSchema = z.object({
   acronym: z.string(),
   source: z.string(),
   rank: z.string(),
-  topics: z.array(z.string()),
+  topicCodes: z.array(z.string()),
 })
 
 export type ImportedConference = z.infer<typeof importedConferenceSchema>

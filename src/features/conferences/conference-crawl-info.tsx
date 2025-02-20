@@ -4,10 +4,10 @@ import { crawlJobColumns } from './components/conference-crawl-info/crawl-jobs-c
 import ConferenceHeader from './components/conference-header'
 import CrawlJobProvider from './contexts/crawl-job-context'
 import { crawlJob } from './data/crawl-info/crawl-job'
-import { CrawlJobListSchema } from './data/crawl-info/schema'
+import {crawlJobListSchema } from './data/crawl-info/schema'
 
 export default function ConferenceCrawlInfo() {
-  const crawlJobList = CrawlJobListSchema.parse(crawlJob)
+  const crawlJobList = crawlJobListSchema.parse(crawlJob)
   return (
     <CrawlJobProvider>
       <ConferenceHeader />

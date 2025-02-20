@@ -5,7 +5,7 @@ import LongText from '@/components/long-text'
 import { ImportedConference } from '../../data/imported-conference/schema'
 import { DataTableColumnHeader } from '../shared/column-header'
 
-export const conferenceImportalColumns: ColumnDef<ImportedConference>[] = [
+export const conferenceImportedColumns: ColumnDef<ImportedConference>[] = [
   {
     id: 'select',
     header: ({ table }) => (

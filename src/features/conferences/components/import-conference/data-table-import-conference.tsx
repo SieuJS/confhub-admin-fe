@@ -24,7 +24,7 @@ import {
 import { useManageCrawlJob } from '../../contexts/manage-crawl-job-context'
 import { ImportedConference } from '../../data/imported-conference/schema'
 import { DataTablePagination } from '../shared/pagination'
-import { conferenceImportalColumns } from './conference-import-columns'
+import { conferenceImportedColumns } from './conference-import-columns'
 import { ImportedConferenceToolbar } from './imported-confernce-tool-bars'
 
 declare module '@tanstack/react-table' {
@@ -44,7 +44,7 @@ export default function ImportConferencesTable() {
 
   const table = useReactTable({
     data: parsedData as ImportedConference[],
-    columns: conferenceImportalColumns,
+    columns: conferenceImportedColumns,
     state: {
       sorting,
       columnVisibility,
@@ -118,7 +118,7 @@ export default function ImportConferencesTable() {
               ) : (
                 <TableRow>
                   <TableCell
-                    colSpan={columns.length}
+                    colSpan={conferenceImportedColumns.length}
                     className='h-24 text-center'
                   >
                     No results.

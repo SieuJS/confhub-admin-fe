@@ -5,13 +5,33 @@ import { Input } from '@/components/ui/input'
 import { DataTableViewOptions } from '@/features/users/components/data-table-view-options'
 import { ImportedConference } from '../../data/imported-conference/schema'
 import { DataTableFacetedFilter } from '../shared/faceted-filter'
+import { useManageCrawlJob } from '../../contexts/manage-crawl-job-context'
 
 interface DataTableToolbarProps {
   table: Table<ImportedConference>
 }
 
+interface SourceOptions {
+  label: string
+  value: string
+}
+
 export function ImportedConferenceToolbar({ table }: DataTableToolbarProps) {
   const isFiltered = table.getState().columnFilters.length > 0
+  const parsedData = useManageCrawlJob().parsedData ; 
+  const sourceOptions : SourceOptions[] = []
+  if (parsedData){
+    const unquiSource = Array.from(new Set(parsedData.map(data => data.source)))
+
+    unquiSource.forEach((data) => {
+      if (data) {
+        sourceOptions.push({
+          label: data,
+          value: data,
+        })
+      }
+    })
+  }
 
   return (
     <div className='flex items-center justify-between'>
@@ -29,7 +49,7 @@ export function ImportedConferenceToolbar({ table }: DataTableToolbarProps) {
             <DataTableFacetedFilter
               column={table.getColumn('source')}
               title='Source'
-              options={[]}
+              options={sourceOptions}
             />
           )}
         </div>

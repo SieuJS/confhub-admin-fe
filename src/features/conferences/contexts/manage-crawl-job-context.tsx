@@ -11,7 +11,9 @@ interface ManageCrawlJobContextType {
   currentRow: CrawlJob | null
   setCurrentRow: React.Dispatch<React.SetStateAction<CrawlJob | null>>
   parsedData: Array<ImportedConference> | null
-  setParsedData: React.Dispatch<React.SetStateAction<Array<ImportedConference> | null>>
+  setParsedData: React.Dispatch<
+    React.SetStateAction<Array<ImportedConference> | null>
+  >
 }
 
 const ManageCrawlJobContext = createContext<ManageCrawlJobContextType | null>(
@@ -26,7 +28,8 @@ export default function ManageCrawlJobProvider({ children }: Props) {
   const [open, setOpen] = useDialogState<ManageCrawlJobDialogType>(null)
   const [currentRow, setCurrentRow] = useState<CrawlJob | null>(null)
 
-  const [parsedData, setParsedData ] = useState< Array<ImportedConference> | null>(null)
+  const [parsedData, setParsedData] =
+    useState<Array<ImportedConference> | null>(null)
 
   return (
     <ManageCrawlJobContext
@@ -35,8 +38,8 @@ export default function ManageCrawlJobProvider({ children }: Props) {
         setOpen,
         currentRow,
         setCurrentRow,
-        parsedData, 
-        setParsedData
+        parsedData,
+        setParsedData,
       }}
     >
       {children}

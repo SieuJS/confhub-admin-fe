@@ -1,6 +1,7 @@
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import PapaParse from 'papaparse'
 import { toast } from '@/hooks/use-toast'
 import { Button } from '@/components/ui/button'
 import {
@@ -22,7 +23,6 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { useManageCrawlJob } from '../../contexts/manage-crawl-job-context'
-import PapaParse from 'papaparse'
 import { ImportedConference } from '../../data/imported-conference/schema'
 
 const formSchema = z.object({
@@ -48,7 +48,7 @@ export function ConferenceImportDialog({ open, onOpenChange }: Props) {
     defaultValues: { file: undefined },
   })
   const fileRef = form.register('file')
-  const manageCrawl = useManageCrawlJob();
+  const manageCrawl = useManageCrawlJob()
   const onSubmit = () => {
     const file = form.getValues('file')
 
@@ -59,22 +59,22 @@ export function ConferenceImportDialog({ open, onOpenChange }: Props) {
         type: file[0].type,
       }
 
-    PapaParse.parse(file[0] , {
-      complete: (result) => {
-        const data = result.data as Array<string[]>
-        const parsed = data.reduce((acc, row) => {
-          const [title, acronym, source, rank, topicCodes] = row
-          const conference: ImportedConference = {
-            title,
-            acronym,
-            source,
-            rank,
-            topicCodes: topicCodes.split(','),
-          }
-          return [...acc, conference]
-        }, [] as ImportedConference[])
-        
-    }})
+      PapaParse.parse(file[0], {
+        complete: (result) => {
+          const data = result.data as Array<string[]>
+          const parsed = data.reduce((acc, row) => {
+            const [title, acronym, source, rank, topicCodes] = row
+            const conference: ImportedConference = {
+              title,
+              acronym,
+              source,
+              rank,
+              topicCodes: topicCodes.split(','),
+            }
+            return [...acc, conference]
+          }, [] as ImportedConference[])
+        },
+      })
 
       toast({
         title: 'You have imported the following file:',

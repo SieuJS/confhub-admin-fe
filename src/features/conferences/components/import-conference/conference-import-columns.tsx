@@ -1,8 +1,8 @@
 import { ColumnDef } from '@tanstack/react-table'
-import { Checkbox } from '@/components/ui/checkbox'
-import { ImportedConference } from '../../data/imported-conference/schema'
 import { cn } from '@/lib/utils'
+import { Checkbox } from '@/components/ui/checkbox'
 import LongText from '@/components/long-text'
+import { ImportedConference } from '../../data/imported-conference/schema'
 import { DataTableColumnHeader } from '../shared/column-header'
 
 export const conferenceImportalColumns: ColumnDef<ImportedConference>[] = [
@@ -35,7 +35,7 @@ export const conferenceImportalColumns: ColumnDef<ImportedConference>[] = [
     enableHiding: false,
   },
   {
-    accessorKey :'title',
+    accessorKey: 'title',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Title' />
     ),
@@ -65,7 +65,7 @@ export const conferenceImportalColumns: ColumnDef<ImportedConference>[] = [
     enableHiding: false,
   },
   {
-    accessorKey :'source',
+    accessorKey: 'source',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Source' />
     ),
@@ -90,7 +90,8 @@ export const conferenceImportalColumns: ColumnDef<ImportedConference>[] = [
       className: cn(
         'bg-background transition-colors duration-200 group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted sticky left-6 md:table-cell'
       ),
-  }},
+    },
+  },
   {
     accessorKey: 'topics',
     header: ({ column }) => (
@@ -98,15 +99,12 @@ export const conferenceImportalColumns: ColumnDef<ImportedConference>[] = [
     ),
     cell: ({ row }) => {
       const topics = row.getValue('topics') as string[]
-      return (
-        <LongText className='max-w-36'>
-          {topics.join(', ')}
-        </LongText>
-        )},
+      return <LongText className='max-w-36'>{topics.join(', ')}</LongText>
+    },
     meta: {
       className: cn(
         'bg-background transition-colors duration-200 group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted sticky left-6 md:table-cell'
       ),
     },
-  }
+  },
 ]

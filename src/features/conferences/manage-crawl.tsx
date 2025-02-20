@@ -1,13 +1,11 @@
 import { Main } from '@/components/layout/main'
 import ConferenceHeader from './components/conference-header'
+import ImportConferencesTable from './components/import-conference/data-table-import-conference'
 import { ManageCrawlDialogs } from './components/manage-crawl/manage-crawl-dialogs'
 import ManageCrawlPrimaryButton from './components/manage-crawl/manage-crawl-primary-button'
 import ManageCrawlJobProvider from './contexts/manage-crawl-job-context'
-import ImportConferencesTable from './components/import-conference/data-table-import-conference'
-
 
 export default function ManageCrawl() {
-
   return (
     <ManageCrawlJobProvider>
       <ConferenceHeader />

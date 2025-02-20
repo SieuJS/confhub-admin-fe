@@ -63,16 +63,19 @@ export function ConferenceImportDialog({ open, onOpenChange }: Props) {
         complete: (result) => {
           const data = result.data as Array<string[]>
           const parsed = data.reduce((acc, row) => {
-            const [title, acronym, source, rank, topicCodes] = row
-            const conference: ImportedConference = {
-              title,
-              acronym,
-              source,
-              rank,
-              topicCodes: topicCodes.split(','),
+            if (!row[1] || !row[2] || !row[3] || !row[4]) {
+              return acc
             }
-            return [...acc, conference]
+            const conference: ImportedConference = {
+              title : row[1] ,
+              acronym : row[2] ,
+              source : row[3] ,
+              rank : row[4] ,
+              topicCodes: row.slice(6),
+            }
+            return [...acc, ( conference)]
           }, [] as ImportedConference[])
+          manageCrawl.setParsedData(parsed)
         },
       })
 

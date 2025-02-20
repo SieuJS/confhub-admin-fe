@@ -93,12 +93,12 @@ export const conferenceImportedColumns: ColumnDef<ImportedConference>[] = [
     },
   },
   {
-    accessorKey: 'topics',
+    accessorKey: 'topicCodes',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Topics' />
     ),
     cell: ({ row }) => {
-      const topics = row.getValue('topics') as string[]
+      const topics = row.getValue('topicCodes') as string[]
       return <LongText className='max-w-36'>{topics.join(', ')}</LongText>
     },
     meta: {

@@ -26,13 +26,29 @@ export const conferenceImportedColumns: ColumnDef<ImportedConference>[] = [
     cell: ({ row }) => (
       <Checkbox
         checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        onCheckedChange={(value) => {
+          row.toggleSelected(!!value)
+        }}
         aria-label='Select row'
         className='translate-y-[2px]'
       />
     ),
     enableSorting: false,
     enableHiding: false,
+  },
+  {
+    accessorKey: 'id',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='ID' />
+    ),
+    cell: ({ row }) => (
+      <LongText className='max-w-24'>{row.getValue('id')}</LongText>
+    ),
+    meta: {
+      className: cn(
+        'bg-background transition-colors duration-200 group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted sticky left-6 md:table-cell'
+      ),
+    },
   },
   {
     accessorKey: 'title',
@@ -99,7 +115,11 @@ export const conferenceImportedColumns: ColumnDef<ImportedConference>[] = [
     ),
     cell: ({ row }) => {
       const topics = row.getValue('topicCodes') as string[]
-      return <LongText className='max-w-36'>{topics.join(', ')}</LongText>
+      return (
+        <LongText className='max-w-36'>
+          {topics.filter((topic) => topic).join(', ')}
+        </LongText>
+      )
     },
     meta: {
       className: cn(

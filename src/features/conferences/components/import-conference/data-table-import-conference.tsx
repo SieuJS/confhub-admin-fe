@@ -42,6 +42,8 @@ export default function ImportConferencesTable() {
 
   const { parsedData } = useManageCrawlJob()
 
+  console.log('rows select', rowSelection)
+
   const table = useReactTable({
     data: parsedData as ImportedConference[],
     columns: conferenceImportedColumns,

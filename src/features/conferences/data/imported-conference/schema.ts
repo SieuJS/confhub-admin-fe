@@ -1,6 +1,7 @@
 import { z } from 'zod'
 
 const importedConferenceSchema = z.object({
+  id: z.number(),
   title: z.string(),
   acronym: z.string(),
   source: z.string(),

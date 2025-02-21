@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button'
 import { useManageCrawlJob } from '../../contexts/manage-crawl-job-context'
 
 export default function ManageCrawlPrimaryButton() {
-  const { setOpen } = useManageCrawlJob()
+  const { setOpen, parsedData } = useManageCrawlJob()
 
   return (
     <div className='flex items-center gap-2'>
@@ -14,13 +14,15 @@ export default function ManageCrawlPrimaryButton() {
       >
         <span>Import CSV</span> <IconDownload size={18} />
       </Button>
-      <Button
-        variant='outline'
-        className='space-x-1'
-        onClick={() => setOpen('crawl')}
-      >
-        <span>Crawl</span> <IconPlayerPlay size={18} />
-      </Button>
+      {parsedData && (
+        <Button
+          variant='outline'
+          className='space-x-1'
+          onClick={() => setOpen('crawl')}
+        >
+          <span>Crawl</span> <IconPlayerPlay size={18} />
+        </Button>
+      )}
     </div>
   )
 }

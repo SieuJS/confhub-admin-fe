@@ -2,6 +2,7 @@ import { toast } from '@/hooks/use-toast'
 import { ConfirmDialog } from '@/components/confirm-dialog'
 import { useManageCrawlJob } from '../../contexts/manage-crawl-job-context'
 import { ConferenceImportDialog } from '../import-conference/conference-import-dialog'
+import { StartCrawlDialog } from './start-crawl-dialog'
 
 export function ManageCrawlDialogs() {
   const { open, setOpen, currentRow, setCurrentRow } = useManageCrawlJob()
@@ -13,6 +14,12 @@ export function ManageCrawlDialogs() {
         open={open === 'import'}
         onOpenChange={() => setOpen('import')}
       />
+      <StartCrawlDialog
+        key={'confernce-crawl'}
+        open={open === 'crawl'}
+        onOpenChange={() => setOpen('crawl')}
+      />
+
       {currentRow && (
         <>
           <ConfirmDialog

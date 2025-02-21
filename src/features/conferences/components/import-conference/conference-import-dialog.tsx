@@ -62,11 +62,13 @@ export function ConferenceImportDialog({ open, onOpenChange }: Props) {
       PapaParse.parse(file[0], {
         complete: (result) => {
           const data = result.data as Array<string[]>
+          let counter = 0
           const parsed = data.reduce((acc, row) => {
             if (!row[1] || !row[2] || !row[3] || !row[4]) {
               return acc
             }
             const conference: ImportedConference = {
+              id: ++counter,
               title: row[1],
               acronym: row[2],
               source: row[3],

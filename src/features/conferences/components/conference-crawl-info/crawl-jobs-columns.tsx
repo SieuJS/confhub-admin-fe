@@ -2,12 +2,12 @@ import { ColumnDef } from '@tanstack/react-table'
 import { cn } from '@/lib/utils'
 import { Badge } from '@/components/ui/badge'
 import { Checkbox } from '@/components/ui/checkbox'
+import { Progress } from '@/components/ui/progress'
 import LongText from '@/components/long-text'
 import { callTypes } from '../../data/crawl-info/data'
 import { CrawlJob } from '../../data/crawl-info/schema'
 import { DataTableColumnHeader } from '../shared/column-header'
 import { DataTableRowActions } from './row-action'
-import { Progress } from '@/components/ui/progress'
 
 export const crawlJobColumns: ColumnDef<CrawlJob>[] = [
   {
@@ -75,11 +75,12 @@ export const crawlJobColumns: ColumnDef<CrawlJob>[] = [
       <DataTableColumnHeader column={column} title='Progress' />
     ),
     cell: ({ row }) => {
-      
       return (
-      <div className='max-w-36'><Progress 
-      value = {row.getValue('progress') as number}/></div>
-    )},
+        <div className='max-w-36'>
+          <Progress value={row.getValue('progress') as number} />
+        </div>
+      )
+    },
     meta: {
       className: cn(
         'bg-background transition-colors duration-200 group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted sticky left-6 md:table-cell'

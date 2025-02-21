@@ -59,7 +59,7 @@ export const conferenceImportedColumns: ColumnDef<ImportedConference>[] = [
     ),
     meta: {
       className: cn(
-        'bg-background transition-colors duration-200 group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted sticky left-6 md:table-cell'
+        'bg-background transition-colors duration-200 sadfsgroup-hover/row:bg-muted group-data-[state=selected]/row:bg-muted sticky left-6 md:table-cell'
       ),
     },
     enableHiding: false,

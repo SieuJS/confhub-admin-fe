@@ -3,7 +3,7 @@ import useDialogState from '@/hooks/use-dialog-state'
 import { CrawlJob } from '../data/crawl-info/schema'
 import { ImportedConference } from '../data/imported-conference/schema'
 
-type ManageCrawlJobDialogType = 'import' | 'edit' | 'delete'
+type ManageCrawlJobDialogType = 'import' | 'edit' | 'delete' | 'crawl'
 
 interface ManageCrawlJobContextType {
   open: ManageCrawlJobDialogType | null

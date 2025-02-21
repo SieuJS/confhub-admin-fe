@@ -35,14 +35,11 @@ declare module '@tanstack/react-table' {
 }
 
 export default function ImportConferencesTable() {
-  const [rowSelection, setRowSelection] = useState({})
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [sorting, setSorting] = useState<SortingState>([])
 
-  const { parsedData } = useManageCrawlJob()
-
-  console.log('rows select', rowSelection)
+  const { parsedData, setSelectToCrawl, selectToCrawl } = useManageCrawlJob()
 
   const table = useReactTable({
     data: parsedData as ImportedConference[],
@@ -50,11 +47,11 @@ export default function ImportConferencesTable() {
     state: {
       sorting,
       columnVisibility,
-      rowSelection,
+      rowSelection: selectToCrawl,
       columnFilters,
     },
     enableRowSelection: true,
-    onRowSelectionChange: setRowSelection,
+    onRowSelectionChange: setSelectToCrawl,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,

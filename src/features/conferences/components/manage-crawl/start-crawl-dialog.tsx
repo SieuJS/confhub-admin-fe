@@ -24,7 +24,6 @@ export function StartCrawlDialog({ open, onOpenChange }: Props) {
   const choosenRow = choosenKeys.map((key) =>
     parsedData ? parsedData[parseInt(key)] || null : null
   )
-  console.log('selected to crawl', choosenKeys)
 
   return (
     <Dialog open={open} onOpenChange={(value) => onOpenChange(value)}>

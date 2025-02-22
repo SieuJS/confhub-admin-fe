@@ -2,9 +2,9 @@ import { Cross2Icon } from '@radix-ui/react-icons'
 import { Table } from '@tanstack/react-table'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import { DataTableFacetedFilter } from '../shared/faceted-filter'
 import { DataTableViewOptions } from '../shared/view-options'
+import { DatePickerWithRange } from '@/components/ui/date-range-picker'
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>
@@ -32,28 +32,7 @@ export function CrawlJobDataTableToolbar<TData>({
           }
           className='h-8 w-[150px] lg:w-[250px]'
         />
-        <div className='flex items-center justify-between gap-2'>
-          <Label htmlFor='from-date'>From</Label>
-          <Input
-            id='from-date'
-            type='date'
-            onChange={(event) =>
-              table.getColumn('createdAt')?.setFilterValue(event.target.value)
-            }
-            className='h-8 w-[50px] lg:w-[150px]'
-          />
-        </div>
-        <div className='flex items-center justify-between gap-2'>
-          <Label htmlFor='to-date'>To</Label>
-          <Input
-            id='to-date'
-            type='date'
-            onChange={(event) =>
-              table.getColumn('createdAt')?.setFilterValue(event.target.value)
-            }
-            className='h-8 w-[50px] lg:w-[150px]'
-          />
-        </div>
+        <DatePickerWithRange/>
         <div className='flex gap-x-2'>
           {table.getColumn('status') && (
             <DataTableFacetedFilter
